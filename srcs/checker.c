@@ -71,7 +71,7 @@ int		check_vals(t_stack *stack, int len)
 // 	return (1);
 // }
 
-int		read_instructions(t_stack *stack)
+int		read_instructions(t_stack *stack, int *valid)
 {
 	char	*line;
 
@@ -100,8 +100,22 @@ int		read_instructions(t_stack *stack)
 		else if (!ft_strcmp(line, "rrr"))
 			ps_rrr(stack);
 		else
-			return (0);		
+			return (ps_error(valid));		
 		print_stack(stack);		
+	}
+	return (1);
+}
+
+int	check_сoincidence(t_stack *stack, int len, int val, int *valid)
+{
+	int i;
+
+	i = 0;
+	while (i < len - 1)
+	{
+		if (stack->a == val)
+			return (ps_error(valid));
+		i++;
 	}
 	return (1);
 }
@@ -115,14 +129,15 @@ int main(int argc, char **argv)
 	i = -1;
 	valid = 1;
 	stack = create_new_stack(argc - 1);
-	while (++i < argc -1)
+	while (++i < argc - 1)
 	{
 		stack->a[i] = ps_atoi(argv[i + 1], &valid);
+		check_сoincidence(stack, i, stack->a[i], valid);
 		if (!valid)
-			return (1);
+			return (0);
 	}
-	read_instructions(stack);
+	if (!read_instructions(stack, valid))
+		return (0);
 	check_vals(stack, i);
-
-	return (0);
+	return (1);
 }
