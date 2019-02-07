@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRCS = srcs/checker.c
+SRCS = srcs/checker.c srcs/cmd.c
 
 OBJ = $(SRCS:.c=.o)
 
