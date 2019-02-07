@@ -6,12 +6,11 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/07 13:36:00 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/07 21:07:54 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "call_cmd.h"
 
 void	print_stack(t_stack *stack)
 {
@@ -40,45 +39,69 @@ int		check_vals(t_stack *stack, int len)
 		write(1, "KO\n", 3);
 		return (0);
 	}
-	while (i <= len)
+	while (i < len - 1)
 	{
-		if (i < len)
+		if (stack->a[i] > stack->a[i + 1])
 		{
-			if (stack->a[i] > stack->a[i + 1])
-			{
-				write(1, "KO\n", 3);
-				return (0);
-			}
-		}
-		else
-		{
-			write(1, "OK\n", 3);
-			return (1);
+			write(1, "KO\n", 3);
+			return (0);
 		}
 		i++;
 	}
-	return (0);
+	write(1, "OK\n", 3);
+	return (1);
 }
 
-int		read_instruchtions(t_stack *stack, int len)
+// int		read_instructions(t_stack *stack)
+// {
+// 	char	*line;
+// 	int		i;
+// 	t_cmd *cmd;
+
+// 	cmd = create_cmd();
+// 	while (get_next_line(0, &line) == 1)
+// 	{
+// 		if (!ft_strcmp(line, cmd[i].cmd))
+// 			cmd[i].f(stack);
+// 				print_stack(stack);
+// 			}
+// 			i++;
+// 		}
+// 	}
+// 	return (1);
+// }
+
+int		read_instructions(t_stack *stack)
 {
 	char	*line;
-	int		i;
 
-	stack->la = len;
-	stack->lb = 0;
 	while (get_next_line(0, &line) == 1)
 	{
-		i = 0;
-		while (i < 11)
-		{
-			if (!ft_strcmp(line, g_ps_cmds[i].cmd))
-			{
-				g_ps_cmds[i].f(stack, g_ps_cmds[i].type_args);
-				print_stack(stack);
-			}
-			i++;
-		}
+		if (!ft_strcmp(line, "sa"))
+			ps_sa(stack);
+		else if (!ft_strcmp(line, "sb"))
+			ps_sb(stack);
+		else if (!ft_strcmp(line, "ss"))
+			ps_ss(stack);
+		else if (!ft_strcmp(line, "pa"))
+			ps_pa(stack);
+		else if (!ft_strcmp(line, "pb"))
+			ps_pb(stack);
+		else if (!ft_strcmp(line, "ra"))
+			ps_ra(stack);
+		else if (!ft_strcmp(line, "rb"))
+			ps_rb(stack);
+		else if (!ft_strcmp(line, "rr"))
+			ps_rr(stack);
+		else if (!ft_strcmp(line, "rra"))
+			ps_rra(stack);
+		else if (!ft_strcmp(line, "rrb"))
+			ps_rrb(stack);
+		else if (!ft_strcmp(line, "rrr"))
+			ps_rrr(stack);
+		else
+			return (0);		
+		print_stack(stack);		
 	}
 	return (1);
 }
@@ -87,13 +110,18 @@ int main(int argc, char **argv)
 {
 	int		i;
 	t_stack	*stack;
+	int		valid;
 
 	i = -1;
-	if (!(stack = (t_stack *)malloc(sizeof(t_stack))))
-		return (0);
+	valid = 1;
+	stack = create_new_stack(argc - 1);
 	while (++i < argc -1)
-		stack->a[i] = ft_atoi(argv[i + 1]);
-	read_instruchtions(stack, i);
+	{
+		stack->a[i] = ps_atoi(argv[i + 1], &valid);
+		if (!valid)
+			return (1);
+	}
+	read_instructions(stack);
 	check_vals(stack, i);
 
 	return (0);

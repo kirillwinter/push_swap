@@ -1,6 +1,7 @@
 NAME = push_swap
 
-SRCS = srcs/checker.c srcs/cmd.c
+SRCS = srcs/checker.c srcs/cdm_reverse_rotate.c	srcs/cmd_swap_push.c \
+	srcs/cmd_rotate.c srcs/ps_create_struct.c srcs/ps_atoi.c
 
 OBJ = $(SRCS:.c=.o)
 
