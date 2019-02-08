@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/07 21:07:54 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/08 13:39:47 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int		read_instructions(t_stack *stack, int *valid)
 		else if (!ft_strcmp(line, "rrr"))
 			ps_rrr(stack);
 		else
-			return (ps_error(valid));		
+			return (ps_error(stack, valid));		
 		print_stack(stack);		
 	}
 	return (1);
@@ -111,10 +111,10 @@ int	check_сoincidence(t_stack *stack, int len, int val, int *valid)
 	int i;
 
 	i = 0;
-	while (i < len - 1)
+	while (i < len)
 	{
-		if (stack->a == val)
-			return (ps_error(valid));
+		if (stack->a[i] == val)
+			return (ps_error(stack, valid));
 		i++;
 	}
 	return (1);
@@ -131,13 +131,14 @@ int main(int argc, char **argv)
 	stack = create_new_stack(argc - 1);
 	while (++i < argc - 1)
 	{
-		stack->a[i] = ps_atoi(argv[i + 1], &valid);
-		check_сoincidence(stack, i, stack->a[i], valid);
+		stack->a[i] = ps_atoi(argv[i + 1], stack, &valid);
+		check_сoincidence(stack, i, stack->a[i], &valid);
 		if (!valid)
 			return (0);
 	}
-	if (!read_instructions(stack, valid))
+	if (!read_instructions(stack, &valid))
 		return (0);
 	check_vals(stack, i);
+	del_stack(stack);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:30:06 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/07 19:46:46 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/08 13:32:38 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ t_stack	*create_new_stack(int len)
 	stack->la = len;
 	stack->lb = 0;
 	return (stack);
+}
+
+void	del_stack(t_stack *stack)
+{
+	free(stack->a);
+	free(stack->b);
+	free(stack);
 }
 
 // t_cmd	*create_cmd()
