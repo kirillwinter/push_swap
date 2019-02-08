@@ -6,11 +6,77 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/08 15:43:51 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/08 17:32:42 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// void	find_max_a(t_stack *stack)
+// {
+// 	int	max;
+// 	int i;
+// 	int	j;
+
+// 	i = 0;
+// 	j = 0;
+// 	max = stack->a[i];
+// 	while(i < stack->la)
+// 	{
+// 		if (max < stack->a[i])
+// 			max = stack->a[i];
+// 		i++;
+// 	}
+// 	i = 0;
+// 	ft_printf("max = %d\n", max);
+// 	while (stack->a[0] != max) //кидаем в б все значения кроме мах
+// 	{
+// 		ps_pb(stack);
+// 		i++;
+// 	}
+// 	ps_ra(stack); // кидаем вниз а мах
+// 	while (max != stack->a[0])
+// 	{
+// 		ps_pb(stack);
+// 		i++;
+// 	}
+	
+	
+// }
+
+void	sort_kirilla_krasavchika(int *tmp, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len - 1)
+	{
+		if (tmp[i] > tmp[i + 1])
+		{
+			ft_swap(&tmp[i], &tmp[i + 1]);
+			i = 0;
+		}
+		else
+			i++;
+	}
+}
+
+int		find_median(t_stack *stack)
+{
+	int	tmp[stack->la];
+	int	i;
+
+	i = 0;
+	while (i < stack->la)
+	{
+		tmp[i] = stack->a[i];
+		i++;
+	}
+	i = 0;
+	sort_kirilla_krasavchika(tmp, stack->la);
+	return (tmp[stack->la / 2]);
+
+}
 
 int		sort_last_three(t_stack *stack)
 {
@@ -39,14 +105,16 @@ int		sort_last_three(t_stack *stack)
 
 int		push_swap(t_stack *stack)
 {
-	while (stack->la > 3)
-	{
-		ps_pb(stack);
-	}
-	sort_last_three(stack);
+	int a;
+	// while (stack->la > 3)
+	// {
+	// 	ps_pb(stack);
+	// }
+	// sort_last_three(stack);
+	// find_max_a(stack);
 
-
-
+	a = find_median(stack);
+	ft_printf("mid = %d\n\n", a);
 	print_stack(stack);
 	return (1);
 }
