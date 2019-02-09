@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/09 19:00:15 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/09 19:42:16 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	sort_top_three_a(t_stack *stack)
 	{
 		ps_sa(stack);
 		ps_ra(stack);
-		ps_ra(stack);
+		ps_sa(stack);
 		ps_rra(stack);
 	}
-	else if (stack->a[0] > stack->a[1] && stack->a[1] > stack->a[0])
+	else if (stack->a[0] > stack->a[1] && stack->a[1] > stack->a[2])
 	{
 		ps_ra(stack);
 		ps_sa(stack);
@@ -114,6 +114,8 @@ void	sort_last_three(t_stack *stack)
 	if (stack->a[0] > stack->a[1])
 		ps_sa(stack);
 }
+
+// 50 49 48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 -1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -11 -12 -13 -14 -15 -16 -17 -18 -19 -20 -21 -22 -23 -24 -25 -26 -27 -28 -29 -30 -31 -32 -33 -34 -35 -36 -37 -38 -39 -40 -41 -42 -43 -44 -45 -46 -47 -48 -49
 // ./push_swap 12 64 87 68 868 565 998 2345325 56757 9 2 5 8 4 83
 int		push_swap(t_stack *stack)
 {
@@ -122,8 +124,6 @@ int		push_swap(t_stack *stack)
 	int	count_block[10];
 	int	n_block;
 	int i = 0;
-
-	// sort_top_three_a(stack);
 
 	mid = find_median(stack->a, stack->la);
 	ft_printf("mid = %d\n", mid);
@@ -233,8 +233,6 @@ int		push_swap(t_stack *stack)
 				n_block--;
 		}
 	}
-		
-
 	ft_printf("n_block = %d\n", n_block);
 	print_stack(stack);
 	return (1);
