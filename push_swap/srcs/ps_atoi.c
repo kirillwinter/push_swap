@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 20:09:31 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/08 21:35:55 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/09 17:29:00 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	print_stack(t_stack *stack)
 	i = 0;
 	ft_printf("la = %d\n", stack->la);
 	ft_printf("lb = %d\n", stack->lb);
+	ft_printf("g_count = %d\n", g_count);
 	while (i < stack->la ||  i < stack->lb)
 	{
 		ft_printf("%d\t", stack->a[i]);

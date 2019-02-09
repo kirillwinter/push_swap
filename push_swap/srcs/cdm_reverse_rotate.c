@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:11:32 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/07 18:17:58 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/09 15:25:49 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ps_rra(t_stack *stack)
 		stack->a[i] = tmp[i];
 		i++;
 	}
+	g_count++;
 }
 
 void	ps_rrb(t_stack *stack)
@@ -58,6 +59,7 @@ void	ps_rrb(t_stack *stack)
 		stack->b[i] = tmp[i];
 		i++;
 	}
+	g_count++;
 }
 
 void	ps_rrr(t_stack *stack)

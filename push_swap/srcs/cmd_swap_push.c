@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:02:40 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/08 13:26:11 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/09 15:26:37 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	ps_sa(t_stack *stack)
 {
 	if (stack->la >= 2)
 		ft_swap(&stack->a[0], &stack->a[1]);
+	g_count++;
 }
 void	ps_sb(t_stack *stack)
 {
 	if (stack->lb >= 2)
 		ft_swap(&stack->b[0], &stack->b[1]);
+	g_count++;
 }
 
 void	ps_ss(t_stack *stack)
@@ -53,6 +55,7 @@ void	ps_pa(t_stack *stack)
 	while (++i < stack->lb)
 		stack->b[i] = stack->b[i + 1];
 	stack->lb--;
+	g_count++;
 }
 
 void	ps_pb(t_stack *stack)
@@ -76,4 +79,5 @@ void	ps_pb(t_stack *stack)
 	while (++i < stack->la)
 		stack->a[i] = stack->a[i + 1];
 	stack->la--;
+	g_count++;
 }
