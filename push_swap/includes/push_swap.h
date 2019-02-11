@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:57:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/11 19:50:57 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/11 23:04:02 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_stack
 // }				t_block;
 
 int				g_count;
+int				g_flag;
 
 void			ps_sa(t_stack *stack);
 void			ps_sb(t_stack *stack);
@@ -69,5 +70,7 @@ void			sort_last_three_a(t_stack *stack);
 
 
 void			sort_in_stack_b(t_stack *stack, int *count_block, int *n_block);
+
+void	sort(t_stack *stack, int *count_block, int *n_block);
 
 #endif

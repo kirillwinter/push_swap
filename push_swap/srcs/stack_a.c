@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:47:20 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/11 22:18:50 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/11 23:08:02 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,22 @@ void	sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
 	int	count_r;
 
 	if (count_block[(*n_block)] == 1)
-		count_block[(*n_block)] =0;
+		{
+			count_block[(*n_block)] =0;
+			g_flag = 1;
+		}
 	else if (count_block[(*n_block)] == 2)
 	{
 		if (stack->a[0] > stack->a[1])
 			ps_sa(stack);
 		count_block[(*n_block)] =0;
+		g_flag = 1;
 	}
 	else if (count_block[(*n_block)] == 3)
 	{
 		sort_top_three_a(stack);
 		count_block[(*n_block)] =0;
+		g_flag = 1;
 	}
 	else
 	{
@@ -134,13 +139,17 @@ void	sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
 				count_r++;
 			}
 		}
+		print_stack(stack);
 		count_block[(*n_block)] = count_r;
 		while (count_r)
 		{
 			ps_rra(stack);
 			count_r--;
 		}
+		print_stack(stack);
 		(*n_block)++;
-		sort_in_stack_a(stack, count_block, n_block);
+		g_flag = 0;
+		// sort(stack, count_block, n_block);
+		// sort_in_stack_a(stack, count_block, n_block);
 	}
 }

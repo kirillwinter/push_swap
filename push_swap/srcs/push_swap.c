@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/11 22:20:40 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/11 23:07:08 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,25 @@ int		find_median(int *arr, int len)
 
 }
 
-// void	sort()
+void	sort(t_stack *stack, int *count_block, int *n_block)
+{
+	while ((*n_block) >= 0)
+	{
+		print_stack(stack);
+		sort_in_stack_b(stack, count_block, n_block);
+		print_stack(stack);
+		// n_block++;
+		sort_in_stack_a(stack, count_block, n_block);
+
+
+
+
+
+		if (count_block[(*n_block)] == 0)
+			(*n_block)--;
+
+	}
+}
 
 int		push_swap(t_stack *stack)
 {
@@ -46,12 +64,6 @@ int		push_swap(t_stack *stack)
 
 	n_block = -1;
 
-	// while(i >= -50)
-	// {
-	// 	ft_printf(" %c%d%c%c", '"', i, '"', ',');
-	// 	i--;
-	// }
-	// return (0);
 	print_stack(stack);
 	while(stack->la > 3)
 		first_sort_in_stack_a(stack, count_block, &n_block);
@@ -59,24 +71,28 @@ int		push_swap(t_stack *stack)
 		sort_last_three_a(stack);
 	else if(stack->la == 2 && stack->a[0] > stack->a[1])
 		ps_sa(stack);
-	
 
 	while (n_block >= 0)
 	{
 		print_stack(stack);
 		sort_in_stack_b(stack, count_block, &n_block);
 		print_stack(stack);
-		// n_block++;
-		sort_in_stack_a(stack, count_block, &n_block);
+		
+		
+		while (g_flag == 0)
+		{
+			g_flag = 0;
+			sort_in_stack_a(stack, count_block, &n_block);
+		}
 
-
-
-
+		
 
 		if (count_block[n_block] == 0)
 			n_block--;
 
 	}
+	// sort(stack, count_block, &n_block);
+	
 	print_stack(stack);
 	return (1);
 }
