@@ -6,7 +6,7 @@ SRCS = srcs/push_swap.c srcs/cdm_reverse_rotate.c	srcs/cmd_swap_push.c \
 OBJ = $(SRCS:.c=.o)
 
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror 
+CFLAGS = -g #-Wall -Wextra -Werror 
 
 LIBFT = ./libft/libft.a
 INC = -I ./includes

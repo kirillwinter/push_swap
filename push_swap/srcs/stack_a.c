@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:47:20 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/11 15:18:31 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/11 22:18:50 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	sort_top_three_a(t_stack *stack)
 	}
 }
 
-void	sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
+void	first_sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
 {
 	int mid;
 	int	count_r;
@@ -82,7 +82,6 @@ void	sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
 	mid = find_median(stack->a, stack->la);
 	(*n_block)++;
 	count_r = 0;
-	ft_printf("mid = %d\n", mid);
 	while (stack->la - count_r > 0)
 	{
 		if (stack->a[0] < mid)
@@ -95,10 +94,53 @@ void	sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
 			ps_ra(stack);
 			count_r++;
 		}
-		print_stack(stack);
 	}
-	ft_printf("кол-во элементов в блоке = %d\n", count_block[(*n_block)]);
-	ft_printf("номер блока = %d\n", n_block);
-	print_stack(stack);
 }
 
+void	sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
+{
+	int mid;
+	int	count_r;
+
+	if (count_block[(*n_block)] == 1)
+		count_block[(*n_block)] =0;
+	else if (count_block[(*n_block)] == 2)
+	{
+		if (stack->a[0] > stack->a[1])
+			ps_sa(stack);
+		count_block[(*n_block)] =0;
+	}
+	else if (count_block[(*n_block)] == 3)
+	{
+		sort_top_three_a(stack);
+		count_block[(*n_block)] =0;
+	}
+	else
+	{
+		mid = find_median(stack->a, count_block[(*n_block)]);
+		count_r = 0;
+		count_block[(*n_block + 1)] = 0;
+		while(count_block[(*n_block)] - count_r > 0)
+		{
+			if (stack->a[0] < mid)
+			{
+				ps_pb(stack);
+				count_block[(*n_block)]--;
+				count_block[(*n_block + 1)]++;
+			}
+			else
+			{
+				ps_ra(stack);
+				count_r++;
+			}
+		}
+		count_block[(*n_block)] = count_r;
+		while (count_r)
+		{
+			ps_rra(stack);
+			count_r--;
+		}
+		(*n_block)++;
+		sort_in_stack_a(stack, count_block, n_block);
+	}
+}
