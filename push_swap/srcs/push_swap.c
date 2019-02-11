@@ -6,28 +6,11 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/09 19:42:16 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/11 14:41:34 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// void	sort_kirilla_krasavchika(int *tmp, int len)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < len - 1)
-// 	{
-// 		if (tmp[i] > tmp[i + 1])
-// 		{
-// 			ft_swap(&tmp[i], &tmp[i + 1]);
-// 			i = 0;
-// 		}
-// 		else
-// 			i++;
-// 	}
-// }
 
 int		find_median(int *arr, int len)
 {
@@ -115,84 +98,112 @@ void	sort_last_three(t_stack *stack)
 		ps_sa(stack);
 }
 
-// 50 49 48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 -1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -11 -12 -13 -14 -15 -16 -17 -18 -19 -20 -21 -22 -23 -24 -25 -26 -27 -28 -29 -30 -31 -32 -33 -34 -35 -36 -37 -38 -39 -40 -41 -42 -43 -44 -45 -46 -47 -48 -49
-// ./push_swap 12 64 87 68 868 565 998 2345325 56757 9 2 5 8 4 83
+
+
+void	sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
+{
+	int mid;
+	int	count_r;
+
+	mid = find_median(stack->a, stack->la);
+	(*n_block)++;
+	count_r = 0;
+	ft_printf("mid = %d\n", mid);
+	while (stack->la - count_r > 0)
+	{
+		if (stack->a[0] < mid)
+		{
+			ps_pb(stack);
+			count_block[(*n_block)]++;
+		}
+		else
+		{
+			ps_ra(stack);
+			count_r++;
+		}
+		print_stack(stack);
+	}
+	ft_printf("кол-во элементов в блоке = %d\n", count_block[(*n_block)]);
+	ft_printf("номер блока = %d\n", n_block);
+	print_stack(stack);
+}
+
+void	check_last_3_in_block_b(t_stack *stack, int *count_block, int *n_block)
+{
+	if (count_block[(*n_block)] == 1)
+	{
+		ps_pa(stack);
+		(*n_block)--;
+	}
+	else if(count_block[(*n_block)] == 2)
+	{
+		ps_pa(stack);
+		ps_pa(stack);
+		if (stack->a[0] > stack->a[1])
+			ps_sa(stack);
+		(*n_block)--;
+	}
+	else if (count_block[(*n_block)] == 3)
+	{
+		ps_pa(stack);
+		ps_pa(stack);
+		ps_pa(stack);
+		sort_top_three_a(stack);
+		(*n_block)--;
+	}
+}
+
+void	sort_in_stack_b(t_stack *stack, int *count_block, int *n_block)
+{
+	int mid;
+	int	count_r;
+
+	mid = find_median(stack->b, count_block[(*n_block)]);
+	ft_printf("mid = %d\n", mid);
+	ft_printf("кол-во элементов в блоке = %d\n", count_block[(*n_block)]);
+	ft_printf("номер блока = %d\n", (*n_block));
+	count_r = 0;
+	while (count_block[(*n_block)] - count_r > 0)
+	{
+		print_stack(stack);
+		if (count_block[(*n_block)] - count_r == 1 && stack->b[0] <= mid)
+			break ;
+		if (stack->b[0] > mid)
+		{
+			ps_pa(stack);
+			count_block[(*n_block)]--;
+		}
+		else
+		{
+			ps_rb(stack);
+			count_r++;
+		}
+		print_stack(stack);
+	}
+}
+
 int		push_swap(t_stack *stack)
 {
 	int mid;
 	int	count_r;
-	int	count_block[10];
+	int	count_block[] = {0, 0, 0, 0, 0, 0};
 	int	n_block;
-	int i = 0;
 
-	mid = find_median(stack->a, stack->la);
-	ft_printf("mid = %d\n", mid);
 	n_block = -1;
 	print_stack(stack);
 	while(stack->la > 3)
 	{
-		mid = find_median(stack->a, stack->la);
-		n_block++;
-		count_block[n_block] = 0;
-		count_r = 0;
-		ft_printf("mid = %d\n", mid);
-		while (stack->la - count_r > 0)
-		{
-			if (stack->a[0] > mid)
-			{
-				ps_ra(stack);
-				count_r++;
-			}
-			else
-			{
-				ps_pb(stack);
-				count_block[n_block]++;
-			}
-			print_stack(stack);
-		}
-		
-		ft_printf("кол-во элементов в блоке = %d\n", count_block[n_block]);
-		ft_printf("номер блока = %d\n", n_block);
-		print_stack(stack);
-		
+		sort_in_stack_a(stack, count_block, &n_block);
 	}
 	if (stack->la == 3)
 		sort_last_three(stack);
 	else if(stack->la == 2 && stack->a[0] > stack->a[1])
 		ps_sa(stack);
-	i = n_block;
+	
 	while (n_block >= 0)
 	{
-		ft_printf("номер блока = %d	кол-во элементов блока = %d\n", n_block, count_block[n_block]);
-		n_block--;
-	}
-	n_block = i;
-	ft_printf("--------------------------------------------\n");
-	//--------------------------------------------
-	while (n_block >= 0)
-	{
-		if(count_block[n_block] == 1)
-		{
-			ps_pa(stack);
-			n_block--;
-		}
-		else if(count_block[n_block] == 2)
-		{
-			ps_pa(stack);
-			ps_pa(stack);
-			if (stack->a[0] > stack->a[1])
-				ps_sa(stack);
-			n_block--;
-		}
-		else if (count_block[n_block] == 3)
-		{
-			ps_pa(stack);
-			ps_pa(stack);
-			ps_pa(stack);
-			sort_top_three_a(stack);
-			n_block--;
-		}
-		
+		if (count_block[n_block] <= 3)
+			check_last_3_in_block_b(stack, count_block, &n_block);
 		else 
 		{
 			mid = find_median(stack->b, count_block[n_block]);
@@ -200,7 +211,6 @@ int		push_swap(t_stack *stack)
 			ft_printf("кол-во элементов в блоке = %d\n", count_block[n_block]);
 			ft_printf("номер блока = %d\n", n_block);
 			count_r = 0;
-		
 			while (count_block[n_block] - count_r > 0)
 			{
 				print_stack(stack);
@@ -216,7 +226,9 @@ int		push_swap(t_stack *stack)
 					ps_rb(stack);
 					count_r++;
 				}
+				print_stack(stack);
 			}
+
 			if (count_r && n_block != 0)
 			{
 				while (count_r)
@@ -226,9 +238,7 @@ int		push_swap(t_stack *stack)
 					print_stack(stack);
 				}
 			}
-			
 			ft_printf("count_block[n_block] = %d\n", count_block[n_block]);
-
 			if (count_block[n_block] == 0)
 				n_block--;
 		}

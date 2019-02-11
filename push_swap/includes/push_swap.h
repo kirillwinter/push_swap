@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:57:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/08 15:09:30 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/11 15:07:34 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,20 @@
 
 typedef struct	s_stack
 {
-	int	*a;
-	int *b;
-	int	la;
-	int	lb;
-}				t_stack;
+	int				*a;
+	int				*b;
+	int				la;
+	int				lb;
+}					t_stack;
+
+typedef struct	s_block
+{
+	int				a;
+	int				b;
+	int				sum;
+	int				n_blcok;
+	struct s_block	*next;
+}				t_block;
 
 int				g_count;
 
@@ -50,5 +59,12 @@ int				ps_error(t_stack *stack, int *valid);
 int				check_vals(t_stack *stack, int len);
 void			print_stack(t_stack *stack);
 int				check_сoincidence(t_stack *stack, int len, int val, int *valid);
+
+int				find_median(int *arr, int len);
+
+void			sort_in_stack_a(t_stack *stack, int *count_block, int *n_block);
+void			sort_top_three_a(t_stack *stack);
+
+void			sort_in_stack_b(t_stack *stack, int *count_block, int *n_block);
 
 #endif
