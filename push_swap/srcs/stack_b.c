@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:47:46 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/11 22:42:51 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/12 16:38:51 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	sort_in_stack_b(t_stack *stack, int *count_block, int *n_block)
 	if (count_block[(*n_block)] <= 3)
 	{
 		check_last_3_in_block_b(stack, count_block, n_block);
+		count_block[(*n_block)] = 0;
 		return ;
 	}
 	else
 	{
 		mid = find_median(stack->b, count_block[(*n_block)]);
-		count_block[(*n_block + 1)] = 0;
 		while (count_block[(*n_block)] - count_r > 0)
 		{
 			// if (count_block[(*n_block)] - count_r == 1 && stack->b[0] <= mid)
@@ -54,14 +54,13 @@ void	sort_in_stack_b(t_stack *stack, int *count_block, int *n_block)
 			{
 				ps_pa(stack);
 				count_block[(*n_block)]--;
-				count_block[(*n_block + 1)]++;
 			}
 			else
 			{
 				ps_rb(stack);
 				count_r++;
 			}
-			print_stack(stack);
+			print_stack(stack, count_block, n_block);
 		}
 		if ((*n_block) != 0)
 		{
@@ -71,8 +70,9 @@ void	sort_in_stack_b(t_stack *stack, int *count_block, int *n_block)
 				count_r--;
 			}
 		}
+		print_stack(stack, count_block, n_block);
 		
-		(*n_block)++;
+		// (*n_block)++;
 		// sort_in_stack_b(stack, count_block, n_block);
 	}
 }

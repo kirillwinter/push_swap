@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/11 23:07:08 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/12 16:38:18 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,65 +35,66 @@ int		find_median(int *arr, int len)
 
 }
 
-void	sort(t_stack *stack, int *count_block, int *n_block)
-{
-	while ((*n_block) >= 0)
-	{
-		print_stack(stack);
-		sort_in_stack_b(stack, count_block, n_block);
-		print_stack(stack);
-		// n_block++;
-		sort_in_stack_a(stack, count_block, n_block);
+// void	sort(t_stack *stack, int *count_block, int *n_block)
+// {
+// 	while ((*n_block) >= 0)
+// 	{
+// 		print_stack(stack, count_block, n_block);
+// 		sort_in_stack_b(stack, count_block, n_block);
+// 		print_stack(stack, count_block, n_block);
+// 		// n_block++;
+// 		sort_in_stack_a(stack, count_block, n_block);
 
 
 
 
 
-		if (count_block[(*n_block)] == 0)
-			(*n_block)--;
+// 		if (count_block[(*n_block)] == 0)
+// 			(*n_block)--;
 
-	}
-}
+// 	}
+// }
 
 int		push_swap(t_stack *stack)
 {
 	int mid;
 	int	count_block[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	int	n_block;
-	int i =  49;
+	int len;
 
 	n_block = -1;
-
-	print_stack(stack);
+	g_sorted = 0;
+	len = stack->la;
+	print_stack(stack, count_block, &n_block);
 	while(stack->la > 3)
 		first_sort_in_stack_a(stack, count_block, &n_block);
 	if (stack->la == 3)
-		sort_last_three_a(stack);
-	else if(stack->la == 2 && stack->a[0] > stack->a[1])
-		ps_sa(stack);
-
-	while (n_block >= 0)
 	{
-		print_stack(stack);
+		sort_last_three_a(stack);
+		g_sorted = 3;
+	}
+	else if(stack->la == 2)
+	{
+		if  (stack->a[0] > stack->a[1])
+			ps_sa(stack);
+		g_sorted = 2;
+	}
+	else if (stack->la == 1)
+		g_sorted = 1;
+		
+
+	while (g_sorted != len)
+	{
+		print_stack(stack, count_block, &n_block);
 		sort_in_stack_b(stack, count_block, &n_block);
-		print_stack(stack);
-		
-		
-		while (g_flag == 0)
-		{
-			g_flag = 0;
-			sort_in_stack_a(stack, count_block, &n_block);
-		}
-
-		
-
+		print_stack(stack, count_block, &n_block);
+		sort_in_stack_a(stack, count_block, &n_block);
 		if (count_block[n_block] == 0)
 			n_block--;
-
 	}
 	// sort(stack, count_block, &n_block);
 	
-	print_stack(stack);
+	print_stack(stack, count_block, &n_block);
 	return (1);
 }
 
@@ -118,5 +119,6 @@ int main(int argc, char **argv)
 		return (0);
 	check_vals(stack, i);
 	del_stack(stack);
+	ft_printf("g_count = %d\n", g_count);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:57:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/11 23:04:02 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/12 15:53:53 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct	s_stack
 // }				t_block;
 
 int				g_count;
-int				g_flag;
+int				g_sorted;
 
 void			ps_sa(t_stack *stack);
 void			ps_sb(t_stack *stack);
@@ -58,7 +58,7 @@ void			del_stack(t_stack *stack);
 int				ps_atoi(const char *str, t_stack *stack, int *valid);
 int				ps_error(t_stack *stack, int *valid);
 int				check_vals(t_stack *stack, int len);
-void			print_stack(t_stack *stack);
+void			print_stack(t_stack *stack, int *count_block, int *n_block);
 int				check_сoincidence(t_stack *stack, int len, int val, int *valid);
 
 int				find_median(int *arr, int len);

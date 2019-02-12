@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 20:09:31 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/09 17:29:00 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/12 16:39:50 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,34 @@ int	check_сoincidence(t_stack *stack, int len, int val, int *valid)
 	return (1);
 }
 
-void	print_stack(t_stack *stack)
+void	print_stack(t_stack *stack, int *count_block, int *n_block)
 {
 	int i;
 
 	i = 0;
 	ft_printf("la = %d\n", stack->la);
 	ft_printf("lb = %d\n", stack->lb);
+	ft_printf("g_sorted = %d\n", g_sorted);
 	ft_printf("g_count = %d\n", g_count);
+	if ((*n_block) >= 0)
+	{
+		while (i < 6)
+		{
+			ft_printf("блок = %d\t", i);
+			ft_printf("элементов = %d\n", count_block[i]);
+			i++;
+		}
+	}
+	
+	i = 0;
 	while (i < stack->la ||  i < stack->lb)
 	{
 		ft_printf("%d\t", stack->a[i]);
 		ft_printf("%d\n", stack->b[i]);
+
 		i++;
 	}
-	ft_printf("\n---------\n");
+	ft_printf("\n-----------------\n");
 	ft_printf("a\tb\n");
 }
 
