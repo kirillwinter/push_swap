@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/12 16:38:18 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/12 17:55:18 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int		push_swap(t_stack *stack)
 	}
 	else if (stack->la == 1)
 		g_sorted = 1;
-		
 
 	while (g_sorted != len)
 	{
@@ -119,6 +118,5 @@ int main(int argc, char **argv)
 		return (0);
 	check_vals(stack, i);
 	del_stack(stack);
-	ft_printf("g_count = %d\n", g_count);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:47:46 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/12 16:38:51 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/12 18:55:25 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,25 @@ void	check_last_3_in_block_b(t_stack *stack, int *count_block, int *n_block)
 	}
 }
 
+int		check_move_val_b(int *arr, int len, int mid)
+{
+	int	pos;
+
+	pos = len;
+	while (len)
+	{
+		if (arr[len] > mid)
+			return (len);
+		len--;
+	}
+	return (pos);
+}
+
 void	sort_in_stack_b(t_stack *stack, int *count_block, int *n_block)
 {
 	int mid;
 	int	count_r;
+	int	pos;
 
 	count_r = 0;
 	if (count_block[(*n_block)] <= 3)
@@ -46,7 +61,8 @@ void	sort_in_stack_b(t_stack *stack, int *count_block, int *n_block)
 	else
 	{
 		mid = find_median(stack->b, count_block[(*n_block)]);
-		while (count_block[(*n_block)] - count_r > 0)
+		pos = check_move_val_b(stack->b, count_block[(*n_block)], mid);
+		while (count_block[(*n_block)] - count_r > pos) //&& pos != -1)
 		{
 			// if (count_block[(*n_block)] - count_r == 1 && stack->b[0] <= mid)
 			// 	break ;
@@ -60,6 +76,7 @@ void	sort_in_stack_b(t_stack *stack, int *count_block, int *n_block)
 				ps_rb(stack);
 				count_r++;
 			}
+
 			print_stack(stack, count_block, n_block);
 		}
 		if ((*n_block) != 0)
@@ -71,8 +88,5 @@ void	sort_in_stack_b(t_stack *stack, int *count_block, int *n_block)
 			}
 		}
 		print_stack(stack, count_block, n_block);
-		
-		// (*n_block)++;
-		// sort_in_stack_b(stack, count_block, n_block);
 	}
 }

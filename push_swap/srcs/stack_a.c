@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:47:20 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/12 16:37:56 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/12 18:03:50 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,6 @@ void	sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
 			count_r--;
 		}
 		print_stack(stack, count_block, n_block);
-		// (*n_block)++;
-		// sort(stack, count_block, n_block);
 		sort_in_stack_a(stack, count_block, n_block);
 	}
 }
