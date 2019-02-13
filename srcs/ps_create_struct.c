@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:30:06 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/08 13:32:38 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 17:17:47 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,3 @@ void	del_stack(t_stack *stack)
 	free(stack->b);
 	free(stack);
 }
-
-// t_cmd	*create_cmd()
-// {
-// 	t_cmd *cmd;
-
-// 	if (!(cmd = (t_cmd *)malloc(sizeof(t_cmd) * 12)))
-// 		return (0);
-	
-
-// 	cmd[0] = {"sa", ps_sa};
-
-// 	cmd = {
-// 		{ "sa", ps_sa },
-// 		{ "sb", ps_sb },
-// 		{ "ss", ps_ss },
-// 		{ "pa", ps_pa },
-// 		{ "pb", ps_pb },
-// 		{ "ra", ps_ra },
-// 		{ "rb", ps_rb },
-// 		{ "rr", ps_rr },
-// 		{ "rra", ps_rra },
-// 		{ "rrb", ps_rrb },
-// 		{ "rrr", ps_rrr },
-// 		{ "", NULL }
-// 	};
-// 	return (cmd);
-// }

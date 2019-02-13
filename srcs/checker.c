@@ -6,116 +6,51 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/08 13:39:47 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 18:06:49 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// #include "checker.h"
 #include "push_swap.h"
 
-void	print_stack(t_stack *stack)
-{
-	int i;
-
-	i = 0;
-	ft_printf("la = %d\n", stack->la);
-	ft_printf("lb = %d\n", stack->lb);
-	while (i < stack->la ||  i < stack->lb)
-	{
-		ft_printf("%d\t", stack->a[i]);
-		ft_printf("%d\n", stack->b[i]);
-		i++;
-	}
-	ft_printf("\n---------\n");
-	ft_printf("a\tb\n");
-}
-
-int		check_vals(t_stack *stack, int len)
-{
-	int i;
-
-	i = 0;
-	if (stack->la != len)
-	{
-		write(1, "KO\n", 3);
-		return (0);
-	}
-	while (i < len - 1)
-	{
-		if (stack->a[i] > stack->a[i + 1])
-		{
-			write(1, "KO\n", 3);
-			return (0);
-		}
-		i++;
-	}
-	write(1, "OK\n", 3);
-	return (1);
-}
-
-// int		read_instructions(t_stack *stack)
-// {
-// 	char	*line;
-// 	int		i;
-// 	t_cmd *cmd;
-
-// 	cmd = create_cmd();
-// 	while (get_next_line(0, &line) == 1)
-// 	{
-// 		if (!ft_strcmp(line, cmd[i].cmd))
-// 			cmd[i].f(stack);
-// 				print_stack(stack);
-// 			}
-// 			i++;
-// 		}
-// 	}
-// 	return (1);
-// }
-
-int		read_instructions(t_stack *stack, int *valid)
+int		read_instructions(t_stack *stack, int *valid, int v)
 {
 	char	*line;
+	int		count_cmd;
 
+	count_cmd = 0;
 	while (get_next_line(0, &line) == 1)
 	{
 		if (!ft_strcmp(line, "sa"))
-			ps_sa(stack);
+			ps_sa(stack, 0);
 		else if (!ft_strcmp(line, "sb"))
-			ps_sb(stack);
+			ps_sb(stack, 0);
 		else if (!ft_strcmp(line, "ss"))
-			ps_ss(stack);
+			ps_ss(stack, 0);
 		else if (!ft_strcmp(line, "pa"))
-			ps_pa(stack);
+			ps_pa(stack, 0);
 		else if (!ft_strcmp(line, "pb"))
-			ps_pb(stack);
+			ps_pb(stack, 0);
 		else if (!ft_strcmp(line, "ra"))
-			ps_ra(stack);
+			ps_ra(stack, 0);
 		else if (!ft_strcmp(line, "rb"))
-			ps_rb(stack);
+			ps_rb(stack, 0);
 		else if (!ft_strcmp(line, "rr"))
-			ps_rr(stack);
+			ps_rr(stack, 0);
 		else if (!ft_strcmp(line, "rra"))
-			ps_rra(stack);
+			ps_rra(stack, 0);
 		else if (!ft_strcmp(line, "rrb"))
-			ps_rrb(stack);
+			ps_rrb(stack, 0);
 		else if (!ft_strcmp(line, "rrr"))
-			ps_rrr(stack);
+			ps_rrr(stack, 0);
 		else
-			return (ps_error(stack, valid));		
-		print_stack(stack);		
-	}
-	return (1);
-}
-
-int	check_сoincidence(t_stack *stack, int len, int val, int *valid)
-{
-	int i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (stack->a[i] == val)
 			return (ps_error(stack, valid));
-		i++;
+		if (v == 1)
+		{
+			count_cmd++;
+			print_stack(stack, count_cmd);
+		}
+			
 	}
 	return (1);
 }
@@ -125,10 +60,19 @@ int main(int argc, char **argv)
 	int		i;
 	t_stack	*stack;
 	int		valid;
+	int		v;
 
 	i = -1;
 	valid = 1;
-	stack = create_new_stack(argc - 1);
+	v = 0;
+	if (argc > 1 && !ft_strcmp(argv[1], "-v"))
+	{
+		v = 1;
+		stack = create_new_stack(argc - 2);
+		i++;
+	}
+	else
+		stack = create_new_stack(argc - 1);
 	while (++i < argc - 1)
 	{
 		stack->a[i] = ps_atoi(argv[i + 1], stack, &valid);
@@ -136,9 +80,9 @@ int main(int argc, char **argv)
 		if (!valid)
 			return (0);
 	}
-	if (!read_instructions(stack, &valid))
+	if (!read_instructions(stack, &valid, v))
 		return (0);
 	check_vals(stack, i);
-	del_stack(stack);
+	// del_stack(stack);
 	return (1);
 }

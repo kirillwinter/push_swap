@@ -6,13 +6,13 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:11:32 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/07 18:17:58 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 17:18:27 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ps_rra(t_stack *stack)
+void	ps_rra(t_stack *stack, int print)
 {
 	int	tmp[stack->la];
 	int i;
@@ -34,9 +34,11 @@ void	ps_rra(t_stack *stack)
 		stack->a[i] = tmp[i];
 		i++;
 	}
+	if (print == 1)
+		write(1, "rra\n", 4);
 }
 
-void	ps_rrb(t_stack *stack)
+void	ps_rrb(t_stack *stack, int print)
 {
 	int	tmp[stack->lb];
 	int i;
@@ -58,10 +60,15 @@ void	ps_rrb(t_stack *stack)
 		stack->b[i] = tmp[i];
 		i++;
 	}
+	if (print == 1)
+		write(1, "rrb\n", 4);
 }
 
-void	ps_rrr(t_stack *stack)
+void	ps_rrr(t_stack *stack, int print)
 {
-	ps_rra(stack);
-	ps_rrb(stack);
+	ps_rra(stack, 0);
+	ps_rrb(stack, 0);
+	if (print == 1)
+		write(1, "rrr\n", 4);
+
 }
