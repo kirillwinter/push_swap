@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/12 17:55:18 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 13:54:05 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,64 +35,28 @@ int		find_median(int *arr, int len)
 
 }
 
-// void	sort(t_stack *stack, int *count_block, int *n_block)
-// {
-// 	while ((*n_block) >= 0)
-// 	{
-// 		print_stack(stack, count_block, n_block);
-// 		sort_in_stack_b(stack, count_block, n_block);
-// 		print_stack(stack, count_block, n_block);
-// 		// n_block++;
-// 		sort_in_stack_a(stack, count_block, n_block);
-
-
-
-
-
-// 		if (count_block[(*n_block)] == 0)
-// 			(*n_block)--;
-
-// 	}
-// }
-
 int		push_swap(t_stack *stack)
 {
 	int mid;
 	int	count_block[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	int	n_block;
 	int len;
+	int	sorted;
 
 	n_block = -1;
-	g_sorted = 0;
+	sorted = 0;
 	len = stack->la;
 	print_stack(stack, count_block, &n_block);
-	while(stack->la > 3)
-		first_sort_in_stack_a(stack, count_block, &n_block);
-	if (stack->la == 3)
-	{
-		sort_last_three_a(stack);
-		g_sorted = 3;
-	}
-	else if(stack->la == 2)
-	{
-		if  (stack->a[0] > stack->a[1])
-			ps_sa(stack);
-		g_sorted = 2;
-	}
-	else if (stack->la == 1)
-		g_sorted = 1;
-
-	while (g_sorted != len)
+	first_sort(stack, count_block, &n_block, &sorted);
+	while (sorted != len)
 	{
 		print_stack(stack, count_block, &n_block);
 		sort_in_stack_b(stack, count_block, &n_block);
 		print_stack(stack, count_block, &n_block);
-		sort_in_stack_a(stack, count_block, &n_block);
+		sort_in_stack_a(stack, count_block, &n_block, &sorted);
 		if (count_block[n_block] == 0)
 			n_block--;
 	}
-	// sort(stack, count_block, &n_block);
-	
 	print_stack(stack, count_block, &n_block);
 	return (1);
 }
