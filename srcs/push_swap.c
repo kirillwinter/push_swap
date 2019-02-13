@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 18:07:04 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 18:55:53 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int main(int argc, char **argv)
 	}
 	if (!push_swap(stack))
 		return (0);
-	// del_stack(stack);
+	del_stack(stack);
 	return (1);
 }

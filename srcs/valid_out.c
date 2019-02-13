@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 20:09:31 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 17:56:01 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 18:56:47 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ void	print_stack(t_stack *stack, int count_cmd)
 		if (i < stack->la)
 			ft_printf("%d\t", stack->a[i]);
 		else
-			ft_printf("\t\t", stack->a[i]);
+			ft_printf("\t");
 		if (i < stack->lb)
 			ft_printf("%d\n", stack->b[i]);
 		else
-			ft_printf("\t\n", stack->a[i]);
+			ft_printf("\n");
 		i++;
 	}
 	ft_printf("\n---------\n");

@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:11:38 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 16:58:31 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 19:44:40 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,39 @@
 
 void	ps_ra(t_stack *stack, int print)
 {
-	int	tmp[stack->la];
-	int i;
-	int	j;
+	int	push;
+	int	i;
 
+	if (!stack->la)
+		return ;
 	i = 0;
-	j = 0;
-	tmp[stack->la - 1] = stack->a[i];
-	i++;
-	while (i < stack->la)
+	push = stack->a[0];
+	while (i < stack->la - 1)
 	{
-		tmp[j] = stack->a[i];
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < stack->la)
-	{
-		stack->a[i] = tmp[i];
+		stack->a[i] = stack->a[i + 1];
 		i++;
 	}
+	stack->a[i] = push;
 	if (print == 1)
 		write(1, "ra\n", 3);
 }
 
+
 void	ps_rb(t_stack *stack, int print)
 {
-	int	tmp[stack->lb];
-	int i;
-	int	j;
+	int	push;
+	int	i;
 
+	if (!stack->lb)
+		return ;
 	i = 0;
-	j = 0;
-	tmp[stack->lb - 1] = stack->b[i];
-	i++;
-	while (i < stack->lb)
+	push = stack->b[0];
+	while (i < stack->lb - 1)
 	{
-		tmp[j] = stack->b[i];
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < stack->lb)
-	{
-		stack->b[i] = tmp[i];
+		stack->b[i] = stack->b[i + 1];
 		i++;
 	}
+	stack->b[i] = push;
 	if (print == 1)
 		write(1, "rb\n", 3);
 }
