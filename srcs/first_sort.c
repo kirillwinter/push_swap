@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 13:46:58 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 17:18:44 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 21:20:34 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sort_last_three_a(t_stack *stack)
 
 	i = 0;
 	max = stack->a[i];
-	while(i < 3)
+	while (i < 3)
 	{
 		if (max < stack->a[i])
 			max = stack->a[i];
@@ -61,16 +61,16 @@ void	first_sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
 
 void	first_sort(t_stack *stack, int *count_block, int *n_block, int *sorted)
 {
-	while(stack->la > 3)
+	while (stack->la > 3)
 		first_sort_in_stack_a(stack, count_block, n_block);
 	if (stack->la == 3)
 	{
 		sort_last_three_a(stack);
 		(*sorted) = 3;
 	}
-	else if(stack->la == 2)
+	else if (stack->la == 2)
 	{
-		if  (stack->a[0] > stack->a[1])
+		if (stack->a[0] > stack->a[1])
 			ps_sa(stack, 1);
 		(*sorted) = 2;
 	}

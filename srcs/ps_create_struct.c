@@ -6,16 +6,16 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:30:06 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 17:17:47 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 21:21:14 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*create_new_stack(int len)
+t_stack		*create_new_stack(int len)
 {
 	t_stack	*stack;
-	int	i;
+	int		i;
 
 	i = -1;
 	if (!(stack = (t_stack *)malloc(sizeof(t_stack))))
@@ -31,7 +31,7 @@ t_stack	*create_new_stack(int len)
 	return (stack);
 }
 
-void	del_stack(t_stack *stack)
+void		del_stack(t_stack *stack)
 {
 	free(stack->a);
 	free(stack->b);

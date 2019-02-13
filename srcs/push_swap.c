@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 18:55:53 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 21:50:41 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int		find_median(int *arr, int len)
 			i++;
 	}
 	return (tmp[len / 2]);
-
 }
 
 int		push_swap(t_stack *stack)
 {
-	int	count_block[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	// int	count_block[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	int	*count_block;
 	int	n_block;
 	int len;
 	int	sorted;
@@ -45,6 +45,7 @@ int		push_swap(t_stack *stack)
 	n_block = -1;
 	sorted = 0;
 	len = stack->la;
+	count_block = ft_memalloc(999);
 	first_sort(stack, count_block, &n_block, &sorted);
 	while (sorted != len)
 	{
@@ -53,6 +54,9 @@ int		push_swap(t_stack *stack)
 		if (count_block[n_block] == 0)
 			n_block--;
 	}
+	print_stack(stack, 0);
+	check_vals(stack, stack->la);
+	free(count_block);
 	return (1);
 }
 

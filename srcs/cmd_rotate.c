@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:11:38 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 19:44:40 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/13 21:03:36 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ps_ra(t_stack *stack, int print)
 	if (print == 1)
 		write(1, "ra\n", 3);
 }
-
 
 void	ps_rb(t_stack *stack, int print)
 {
