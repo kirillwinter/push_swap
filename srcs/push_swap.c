@@ -6,13 +6,13 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 21:50:41 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/14 21:17:56 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		find_median(int *arr, int len)
+int			find_median(int *arr, int len)
 {
 	int	tmp[len];
 	int	i;
@@ -34,9 +34,8 @@ int		find_median(int *arr, int len)
 	return (tmp[len / 2]);
 }
 
-int		push_swap(t_stack *stack)
+static int	push_swap(t_stack *stack)
 {
-	// int	count_block[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	int	*count_block;
 	int	n_block;
 	int len;
@@ -49,35 +48,72 @@ int		push_swap(t_stack *stack)
 	first_sort(stack, count_block, &n_block, &sorted);
 	while (sorted != len)
 	{
-		sort_in_stack_b(stack, count_block, &n_block);
-		sort_in_stack_a(stack, count_block, &n_block, &sorted);
+		sort_b(stack, count_block, &n_block);
+		sort_a(stack, count_block, &n_block, &sorted);
 		if (count_block[n_block] == 0)
 			n_block--;
 	}
-	print_stack(stack, 0);
-	check_vals(stack, stack->la);
 	free(count_block);
 	return (1);
 }
 
-int main(int argc, char **argv)
+static int	read_one_arg_ps(char **argv)
 {
 	int		i;
+	char	**vals;
 	t_stack	*stack;
+	int		len_vals;
 	int		valid;
+
+	i = -1;
+	valid = 1;
+	vals = ft_strsplit(argv[1], ' ');
+	len_vals = ft_strcount((const char**)vals);
+	stack = create_new_stack(len_vals);
+	while (++i < len_vals)
+	{
+		stack->a[i] = ps_atoi(vals[i], &valid);
+		check_сoincidence(stack, i, stack->a[i], &valid);
+		if (!valid)
+			return (del_stack(stack));
+	}
+	push_swap(stack);
+	del_stack(stack);
+	return (1);
+}
+
+static int	read_many_arg_ps(int argc, char **argv)
+{
+	int		i;
+	int		valid;
+	t_stack	*stack;
 
 	i = -1;
 	valid = 1;
 	stack = create_new_stack(argc - 1);
 	while (++i < argc - 1)
 	{
-		stack->a[i] = ps_atoi(argv[i + 1], stack, &valid);
+		stack->a[i] = ps_atoi(argv[i + 1], &valid);
 		check_сoincidence(stack, i, stack->a[i], &valid);
 		if (!valid)
+			return (del_stack(stack));
+	}
+	push_swap(stack);
+	del_stack(stack);
+	return (1);
+}
+
+int			main(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		if (!read_one_arg_ps(argv))
 			return (0);
 	}
-	if (!push_swap(stack))
-		return (0);
-	del_stack(stack);
+	else
+	{
+		if (!read_many_arg_ps(argc, argv))
+			return (0);
+	}
 	return (1);
 }

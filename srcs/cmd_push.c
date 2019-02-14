@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 16:04:00 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 21:03:04 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/14 16:21:53 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ void	ps_pb(t_stack *stack, int print)
 	}
 	stack->la--;
 	if (print == 1)
-		write(1, "pa\n", 3);
+		write(1, "pb\n", 3);
 }

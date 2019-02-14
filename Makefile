@@ -15,15 +15,20 @@ OBJC = $(SRCSC:.c=.o)
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror 
 
-LIBFT = ./libft/libft.a
 INC = -I ./includes
-LIBLINK = -L ./libft -lft
-LIBINC = -I ./libft/includes
+
+LIBFT = ./libft/libft.a
+LIBMLX = ./minilibx_macos/libmlx.a
+# MLXINC = -I ./minilibx_macos/
+# LIBLINK = -L ./libft -lft
+#LIBINC = -I ./libft/includes 
+LIBINCS = -I ./libft/includes -I ./minilibx_macos/
+LIBS = -L ./libft -lft -L ./minilibx_macos -lmlx
 
 all: $(NAMEPS) $(NAMEC)
 
 %.o:%.c
-	@$(CC) $(CFLAGS) $(LIBINC) $(INC) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(LIBINCS) $(INC) -o $@ -c $<
 
 libft: $(LIBFT)
 
@@ -32,14 +37,19 @@ $(LIBFT):
 	@make -C ./libft
 	@echo "OK!"
 
-$(NAMEPS): libft $(OBJPS) $(OBJ)
+$(LIBMLX):
+	@echo "Compiling minilibx..."
+	@make -C ./minilibx_macos
+	@echo "OK!"
+
+$(NAMEPS): libft $(LIBMLX) $(OBJPS) $(OBJ)
 	@echo "Compiling push_swap..."
-	@$(CC) $(LIBLINK) -o $(NAMEPS) $(OBJPS) $(OBJ)
+	@$(CC) $(LIBS) -o $(NAMEPS) $(OBJPS) $(OBJ)
 	@echo "OK!"
 
 $(NAMEC): libft $(OBJC) $(OBJ)
 	@echo "Compiling checker..."
-	@$(CC) $(LIBLINK) -o $(NAMEC) $(OBJC) $(OBJ)
+	@$(CC) $(LIBS) -o $(NAMEC) $(OBJC) $(OBJ)
 	@echo "OK!"
 
 rmlib:

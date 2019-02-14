@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:30:06 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 21:21:14 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/14 20:49:50 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,20 @@ t_stack		*create_new_stack(int len)
 	return (stack);
 }
 
-void		del_stack(t_stack *stack)
+int			del_stack(t_stack *stack)
 {
-	free(stack->a);
-	free(stack->b);
-	free(stack);
+	if (stack)
+	{
+		free(stack->a);
+		free(stack->b);
+		free(stack);
+	}
+	return (0);
+}
+
+int			ps_error(int *valid)
+{
+	write(2, "Error\n", 6);
+	(*valid) = 0;
+	return (0);
 }
