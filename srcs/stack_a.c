@@ -6,13 +6,34 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:47:20 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/14 21:29:47 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/14 22:10:39 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		sort_top_three_a(t_stack *stack)
+static void	sort_top_three_a2(t_stack *stack)
+{
+	if (stack->a[0] > stack->a[2] && stack->a[2] > stack->a[1])
+	{
+		ps_sa(stack, 1);
+		ps_ra(stack, 1);
+		ps_sa(stack, 1);
+		ps_rra(stack, 1);
+	}
+	else if (stack->a[0] > stack->a[1] && stack->a[1] > stack->a[2])
+	{
+		ps_ra(stack, 1);
+		ps_sa(stack, 1);
+		ps_rra(stack, 1);
+		ps_sa(stack, 1);
+		ps_ra(stack, 1);
+		ps_sa(stack, 1);
+		ps_rra(stack, 1);
+	}
+}
+
+static void	sort_top_three_a(t_stack *stack)
 {
 	if (stack->a[0] < stack->a[1] && stack->a[1] < stack->a[2])
 		return ;
@@ -31,23 +52,8 @@ void		sort_top_three_a(t_stack *stack)
 		ps_rra(stack, 1);
 		ps_sa(stack, 1);
 	}
-	else if (stack->a[0] > stack->a[2] && stack->a[2] > stack->a[1])
-	{
-		ps_sa(stack, 1);
-		ps_ra(stack, 1);
-		ps_sa(stack, 1);
-		ps_rra(stack, 1);
-	}
-	else if (stack->a[0] > stack->a[1] && stack->a[1] > stack->a[2])
-	{
-		ps_ra(stack, 1);
-		ps_sa(stack, 1);
-		ps_rra(stack, 1);
-		ps_sa(stack, 1);
-		ps_ra(stack, 1);
-		ps_sa(stack, 1);
-		ps_rra(stack, 1);
-	}
+	else
+		sort_top_three_a2(stack);
 }
 
 void		check_last_3_in_block_a(t_stack *stack, int *sorted, int unsorted)
@@ -81,15 +87,15 @@ int			check_move_val_a(int *arr, int len, int mid)
 	return (len);
 }
 
-// static void	move_a(t_stack *stack, int *count_block, int *n_block,\
+// void	move_a(t_stack *stack, int *count_block, int *n_block,\
 // 					int *count_r, int unsorted)
 // {
 // 	int mid;
 // 	int	pos;
 
 // 	mid = find_median(stack->a, count_block[(*n_block)]);
+// 	ft_printf("do %d\n", (*n_block));
 // 	(*n_block)++;
-// 	count_r = 0;
 // 	pos = check_move_val_a(stack->a, unsorted, mid) + 1;
 // 	while(pos)
 // 	{
