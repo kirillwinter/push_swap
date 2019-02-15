@@ -6,11 +6,55 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 13:46:58 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/13 21:20:34 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/15 12:33:41 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	sort_top_three_a2(t_stack *stack)
+{
+	if (stack->a[0] > stack->a[2] && stack->a[2] > stack->a[1])
+	{
+		ps_sa(stack, 1);
+		ps_ra(stack, 1);
+		ps_sa(stack, 1);
+		ps_rra(stack, 1);
+	}
+	else if (stack->a[0] > stack->a[1] && stack->a[1] > stack->a[2])
+	{
+		ps_ra(stack, 1);
+		ps_sa(stack, 1);
+		ps_rra(stack, 1);
+		ps_sa(stack, 1);
+		ps_ra(stack, 1);
+		ps_sa(stack, 1);
+		ps_rra(stack, 1);
+	}
+}
+
+void	sort_top_three_a(t_stack *stack)
+{
+	if (stack->a[0] < stack->a[1] && stack->a[1] < stack->a[2])
+		return ;
+	else if (stack->a[0] < stack->a[2] && stack->a[1] > stack->a[2])
+	{
+		ps_ra(stack, 1);
+		ps_sa(stack, 1);
+		ps_rra(stack, 1);
+	}
+	else if (stack->a[0] > stack->a[1] && stack->a[0] < stack->a[2])
+		ps_sa(stack, 1);
+	else if (stack->a[0] < stack->a[1] && stack->a[0] > stack->a[2])
+	{
+		ps_ra(stack, 1);
+		ps_sa(stack, 1);
+		ps_rra(stack, 1);
+		ps_sa(stack, 1);
+	}
+	else
+		sort_top_three_a2(stack);
+}
 
 void	sort_last_three_a(t_stack *stack)
 {
@@ -36,7 +80,7 @@ void	sort_last_three_a(t_stack *stack)
 		ps_sa(stack, 1);
 }
 
-void	first_sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
+void	first_move_a(t_stack *stack, int *count_block, int *n_block)
 {
 	int mid;
 	int	count_r;
@@ -62,7 +106,7 @@ void	first_sort_in_stack_a(t_stack *stack, int *count_block, int *n_block)
 void	first_sort(t_stack *stack, int *count_block, int *n_block, int *sorted)
 {
 	while (stack->la > 3)
-		first_sort_in_stack_a(stack, count_block, n_block);
+		first_move_a(stack, count_block, n_block);
 	if (stack->la == 3)
 	{
 		sort_last_three_a(stack);

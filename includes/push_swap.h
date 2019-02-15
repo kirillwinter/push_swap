@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:57:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/14 21:17:34 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/15 12:33:42 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int				find_median(int *arr, int len);
 
 void			first_sort(t_stack *stack, int *count_block, int *n_block,\
 				int *sorted);
+void			sort_top_three_a(t_stack *stack);
 
 void			sort_a(t_stack *stack, int *count_block, int *n_block,\
 				int *sorted);
-int				check_move_val_a(int *arr, int len, int mid);
 
 void			sort_b(t_stack *stack, int *count_block, int *n_block);
 
