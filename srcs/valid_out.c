@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 20:09:31 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/14 21:13:41 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/15 18:02:05 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,31 @@ void		print_stack(t_stack *stack, int count_cmd)
 	ft_printf("a\tb\n");
 }
 
-int			check_vals(t_stack *stack, int len)
+int			check_vals(t_stack *stack, int len, int checker)
 {
 	int i;
 
 	i = 0;
-	if (stack->la != len)
+	if (checker == 1)
 	{
-		write(1, "KO\n", 3);
-		return (0);
+		if (stack->la != len)
+		{
+			write(1, "KO\n", 3);
+			return (0);
+		}
 	}
 	while (i < len - 1)
 	{
 		if (stack->a[i] > stack->a[i + 1])
 		{
-			write(1, "KO\n", 3);
+			if (checker == 1)
+				write(1, "KO\n", 3);
 			return (0);
 		}
 		i++;
 	}
-	write(1, "OK\n", 3);
+	if (checker == 1)
+		write(1, "OK\n", 3);
 	return (1);
 }
 
@@ -101,7 +106,7 @@ static int	ps_valid_nbr(const char *str, int *valid)
 int			ps_atoi(const char *str, int *valid)
 {
 	int			i;
-	long int	nb;
+	long long	nb;
 	int			sign;
 
 	nb = 0;
@@ -118,7 +123,7 @@ int			ps_atoi(const char *str, int *valid)
 	{
 		nb = nb * 10 + (str[i] - '0');
 		i++;
-		if (nb < -2147483648 || nb > 2147483647)
+		if ((nb > 2147483648 && sign == -1) || (nb > 2147483647 && sign == 1))
 			return (ps_error(valid));
 	}
 	return (sign * nb);

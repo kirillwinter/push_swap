@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/14 21:17:56 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/15 18:35:30 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	push_swap(t_stack *stack)
 		if (count_block[n_block] == 0)
 			n_block--;
 	}
+	// print_stack(stack, 0);
 	free(count_block);
 	return (1);
 }
@@ -77,7 +78,8 @@ static int	read_one_arg_ps(char **argv)
 		if (!valid)
 			return (del_stack(stack));
 	}
-	push_swap(stack);
+	if (!check_vals(stack, i, 0))
+		push_swap(stack);
 	del_stack(stack);
 	return (1);
 }
@@ -98,7 +100,8 @@ static int	read_many_arg_ps(int argc, char **argv)
 		if (!valid)
 			return (del_stack(stack));
 	}
-	push_swap(stack);
+	if (!check_vals(stack, i, 0))
+		push_swap(stack);
 	del_stack(stack);
 	return (1);
 }

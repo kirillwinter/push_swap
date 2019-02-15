@@ -1,7 +1,7 @@
 NAMEPS = push_swap
 NAMEC = checker
 
-SRCS = srcs/cdm_reverse_rotate.c srcs/cmd_swap.c  srcs/cmd_push.c \
+SRCS = srcs/cmd_reverse_rotate.c srcs/cmd_swap.c  srcs/cmd_push.c \
 	srcs/cmd_rotate.c srcs/ps_create_struct.c srcs/valid_out.c
 
 SRCSPS = srcs/push_swap.c srcs/stack_a.c srcs/stack_b.c srcs/first_sort.c
@@ -14,6 +14,7 @@ OBJC = $(SRCSC:.c=.o)
 
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror 
+MLXFLAGS =  -framework OpenGL -framework AppKit
 
 INC = -I ./includes
 
@@ -44,12 +45,12 @@ $(LIBMLX):
 
 $(NAMEPS): libft $(LIBMLX) $(OBJPS) $(OBJ)
 	@echo "Compiling push_swap..."
-	@$(CC) $(LIBS) -o $(NAMEPS) $(OBJPS) $(OBJ)
+	$(CC) $(LIBS) -o $(NAMEPS) $(OBJPS) $(OBJ)
 	@echo "OK!"
 
-$(NAMEC): libft $(OBJC) $(OBJ)
+$(NAMEC): libft $(LIBMLX) $(OBJC) $(OBJ)
 	@echo "Compiling checker..."
-	@$(CC) $(LIBS) -o $(NAMEC) $(OBJC) $(OBJ)
+	@$(CC) $(LIBS) $(MLXFLAGS) -o $(NAMEC) $(OBJC) $(OBJ)
 	@echo "OK!"
 
 rmlib:

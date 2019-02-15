@@ -6,11 +6,26 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/14 21:12:15 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/15 20:52:29 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// void	draw()
+// {
+
+// }
+
+void	new_draw_window() //(t_stack *stack)
+{
+	void *mlx_ptr;
+	char *title;
+
+	title = ft_strdup("Кирилл красавчик");
+	mlx_ptr = mlx_init();
+	mlx_new_window (mlx_ptr, 500, 500, title);
+}
 
 static int	call_cmd(t_stack *stack, char *line, int *valid)
 {
@@ -47,17 +62,24 @@ static int	read_instructions(t_stack *stack, int *valid, int v)
 	int		count_cmd;
 
 	count_cmd = 0;
+	line = NULL;
 	if (v == 2)
 		print_stack(stack, count_cmd);
 	while (get_next_line(0, &line) == 1)
 	{
 		if (!call_cmd(stack, line, valid))
+		{
+			free(line);
 			return (0);
+		}
 		if (v == 2)
 		{
 			count_cmd++;
+			// draw();
 			print_stack(stack, count_cmd);
 		}
+		if (line)
+			free(line);
 	}
 	return (1);
 }
@@ -84,10 +106,15 @@ static int	read_one_arg_checker(char **argv, int v)
 	}
 	if (!read_instructions(stack, &valid, v))
 		return (del_stack(stack));
-	check_vals(stack, i);
+	check_vals(stack, i, 1);
 	del_stack(stack);
 	return (1);
 }
+
+// int			checker()
+// {
+
+// }
 
 static int	read_many_arg_checker(int argc, char **argv, int v)
 {
@@ -105,9 +132,11 @@ static int	read_many_arg_checker(int argc, char **argv, int v)
 		if (!valid)
 			return (del_stack(stack));
 	}
+	if (v == 2)
+		new_draw_window();
 	if (!read_instructions(stack, &valid, v))
 		return (del_stack(stack));
-	check_vals(stack, i);
+	check_vals(stack, i, 1);
 	del_stack(stack);
 	return (1);
 }

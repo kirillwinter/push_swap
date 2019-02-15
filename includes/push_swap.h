@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:57:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/15 12:33:42 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/15 20:36:02 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_stack			*create_new_stack(int len);
 int				del_stack(t_stack *stack);
 int				ps_atoi(const char *str, int *valid);
 int				ps_error(int *valid);
-int				check_vals(t_stack *stack, int len);
+int				check_vals(t_stack *stack, int len, int checker);
 
 void			print_stack(t_stack *stack, int count_cmd);
 int				check_сoincidence(t_stack *stack, int len, int val, int *valid);
@@ -53,6 +53,7 @@ void			sort_top_three_a(t_stack *stack);
 
 void			sort_a(t_stack *stack, int *count_block, int *n_block,\
 				int *sorted);
+int				check_move_val_a(int *arr, int len, int mid);
 
 void			sort_b(t_stack *stack, int *count_block, int *n_block);
 
