@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:30:06 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/14 20:49:50 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:57:32 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,36 @@ t_stack		*create_new_stack(int len)
 	stack->la = len;
 	stack->lb = 0;
 	return (stack);
+}
+
+t_draw		*create_new_draw()
+{
+	t_draw	*draw;
+	char	*title;
+	
+	if (!(draw = (t_draw *)malloc(sizeof(t_draw))))
+		return (0);
+	if (!(draw->mlx_ptr = (void *)malloc(sizeof(void))))
+		return (0);
+	if (!(draw->win_ptr = (void *)malloc(sizeof(void))))
+		return (0);	
+	title = ft_strdup("KK");
+	draw->mlx_ptr = mlx_init();
+	draw->win_ptr = mlx_new_window (draw->mlx_ptr, WIN_SIZE, WIN_SIZE, title);
+	return (draw);
+}
+
+t_sd	*create_new_sd(t_stack *stack)
+{
+	t_sd	*sd;
+
+	if (!(sd = (t_sd *)malloc(sizeof(t_sd))))
+		return (0);
+	sd->draw = create_new_draw();
+	sd->stack = stack;
+	sd->hight_line = WIN_SIZE / sd->stack->la;
+	sd->width_one = (WIN_SIZE /2) / ft_intmax(sd->stack->a, sd->stack->la);
+	return (sd);
 }
 
 int			del_stack(t_stack *stack)

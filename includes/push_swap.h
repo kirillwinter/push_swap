@@ -6,12 +6,18 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:57:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/15 20:36:02 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:50:19 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# define WIN_SIZE 500
+# define D_BACK_A 0x1049A9
+# define D_BACK_B 0x29497F
+# define D_POSITIV 0x4479D4
+# define D_NEGATIV 0x6A92D4
 
 # include "libft.h"
 # include "mlx.h"
@@ -23,6 +29,20 @@ typedef struct	s_stack
 	int			la;
 	int			lb;
 }				t_stack;
+
+typedef struct	s_draw
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+}				t_draw;
+
+typedef struct	s_sd
+{
+	t_draw		*draw;
+	t_stack		*stack;
+	int			hight_line;
+	int			width_one;
+}				t_sd;
 
 void			ps_sa(t_stack *stack, int print);
 void			ps_sb(t_stack *stack, int print);
@@ -36,7 +56,13 @@ void			ps_rra(t_stack *stack, int print);
 void			ps_rrb(t_stack *stack, int print);
 void			ps_rrr(t_stack *stack, int print);
 
+int				call_cmd(t_stack *stack, char *line, int *valid);
 t_stack			*create_new_stack(int len);
+
+t_draw			*create_new_draw();
+t_sd			*create_new_sd(t_stack *stack);
+int				ps_draw(t_sd *sd);
+
 int				del_stack(t_stack *stack);
 int				ps_atoi(const char *str, int *valid);
 int				ps_error(int *valid);
