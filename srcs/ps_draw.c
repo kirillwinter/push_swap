@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 16:42:47 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/18 20:36:29 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/18 21:11:01 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ void	visual_line(t_sd *sd, int len)
 	start_pos_a = WIN_SIZE - sd->stack->la * sd->hight_line;
 	start_pos_b = WIN_SIZE - sd->stack->lb * sd->hight_line;
 	len = 0;
- 	//while (y < len - MAX(sd->stack->la, sd->stack->lb)) // отрисовка фона до первой линии
-	// while (y < MIN(diff_line_stack_a, diff_line_stack_b))
-	// {
-	// 	x = -1;
-	// 	while (++x < WIN_SIZE / 2)
-	// 		mlx_pixel_put(sd->draw->mlx_ptr, sd->draw->win_ptr, x, y, D_BACK_A);
-	// 	while (++x < WIN_SIZE)
-	// 		mlx_pixel_put(sd->draw->mlx_ptr, sd->draw->win_ptr, x, y, D_BACK_B);
-	// 	y++;
-	// }
-	// ft_printf("hight_line %d\n", sd->hight_line);
-	// ft_printf("width_one %d\n", sd->width_one);
-	// ft_printf("start_pos_a %d\n", start_pos_a);
-	// ft_printf("start_pos_b %d\n", start_pos_b);
+ 	// while (y < len - MAX(sd->stack->la, sd->stack->lb)) // отрисовка фона до первой линии
+	while (y < MIN(start_pos_a, start_pos_b))
+	{
+		x = -1;
+		while (++x < WIN_SIZE / 2)
+			mlx_pixel_put(sd->draw->mlx_ptr, sd->draw->win_ptr, x, y, D_BACK_A);
+		while (++x < WIN_SIZE)
+			mlx_pixel_put(sd->draw->mlx_ptr, sd->draw->win_ptr, x, y, D_BACK_B);
+		y++;
+	}
+	ft_printf("hight_line %d\n", sd->hight_line);
+	ft_printf("width_one %d\n", sd->width_one);
+	ft_printf("start_pos_a %d\n", start_pos_a);
+	ft_printf("start_pos_b %d\n", start_pos_b);
 	while (y < WIN_SIZE)
 	{
 		flag_a = 0;
