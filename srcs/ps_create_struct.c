@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:30:06 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/18 18:57:32 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/19 12:38:58 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_sd	*create_new_sd(t_stack *stack)
 	sd->draw = create_new_draw();
 	sd->stack = stack;
 	sd->hight_line = WIN_SIZE / sd->stack->la;
-	sd->width_one = (WIN_SIZE /2) / ft_intmax(sd->stack->a, sd->stack->la);
+	sd->width_one = (WIN_SIZE /2) / ft_intmaxabs(sd->stack->a, sd->stack->la);
 	return (sd);
 }
 
