@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/15 18:35:30 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/19 16:22:29 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static int	push_swap(t_stack *stack)
 		if (count_block[n_block] == 0)
 			n_block--;
 	}
-	// print_stack(stack, 0);
 	free(count_block);
 	return (1);
 }
@@ -108,6 +107,10 @@ static int	read_many_arg_ps(int argc, char **argv)
 
 int			main(int argc, char **argv)
 {
+	int	v;
+
+	if (argc == 1)
+		return (ps_error(&v));
 	if (argc == 2)
 	{
 		if (!read_one_arg_ps(argv))

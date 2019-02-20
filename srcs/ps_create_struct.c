@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 18:30:06 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/19 12:38:58 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/19 15:35:04 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,18 @@ t_stack		*create_new_stack(int len)
 	return (stack);
 }
 
-t_draw		*create_new_draw()
+t_draw		*create_new_draw(void)
 {
 	t_draw	*draw;
-	char	*title;
-	
+
 	if (!(draw = (t_draw *)malloc(sizeof(t_draw))))
 		return (0);
-	if (!(draw->mlx_ptr = (void *)malloc(sizeof(void))))
-		return (0);
-	if (!(draw->win_ptr = (void *)malloc(sizeof(void))))
-		return (0);	
-	title = ft_strdup("KK");
 	draw->mlx_ptr = mlx_init();
-	draw->win_ptr = mlx_new_window (draw->mlx_ptr, WIN_SIZE, WIN_SIZE, title);
+	draw->win_ptr = mlx_new_window(draw->mlx_ptr, WIN_SIZE, WIN_SIZE, "KK");
 	return (draw);
 }
 
-t_sd	*create_new_sd(t_stack *stack)
+t_sd		*create_new_sd(t_stack *stack)
 {
 	t_sd	*sd;
 
@@ -56,8 +50,9 @@ t_sd	*create_new_sd(t_stack *stack)
 		return (0);
 	sd->draw = create_new_draw();
 	sd->stack = stack;
+	sd->len = sd->stack->la;
 	sd->hight_line = WIN_SIZE / sd->stack->la;
-	sd->width_one = (WIN_SIZE /2) / ft_intmaxabs(sd->stack->a, sd->stack->la);
+	sd->width_one = (WIN_SIZE / 2) / ft_intmaxabs(sd->stack->a, sd->stack->la);
 	return (sd);
 }
 
@@ -72,9 +67,11 @@ int			del_stack(t_stack *stack)
 	return (0);
 }
 
-int			ps_error(int *valid)
+int			del_sd(t_sd *sd)
 {
-	write(2, "Error\n", 6);
-	(*valid) = 0;
+	if (sd->draw)
+		free(sd->draw);
+	if (sd)
+		free(sd);
 	return (0);
 }

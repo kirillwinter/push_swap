@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 13:46:58 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/15 19:58:14 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/19 15:36:41 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	first_move_a(t_stack *stack, int *count_block, int *n_block)
 
 	mid = find_median(stack->a, stack->la);
 	(*n_block)++;
-	pos = check_move_val_a(stack->a,  stack->la, mid) + 1;
+	pos = check_move_val_a(stack->a, stack->la, mid) + 1;
 	while (pos)
 	{
 		if (stack->a[0] < mid)
@@ -98,7 +98,6 @@ void	first_move_a(t_stack *stack, int *count_block, int *n_block)
 		else
 			ps_ra(stack, 1);
 		pos--;
-		// print_stack(stack, 0);
 	}
 }
 
@@ -106,7 +105,6 @@ void	first_sort(t_stack *stack, int *count_block, int *n_block, int *sorted)
 {
 	while (stack->la > 3)
 	{
-		// print_stack(stack, 0);
 		if (check_vals(stack, stack->la, 0))
 		{
 			(*sorted) = stack->la;

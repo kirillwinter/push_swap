@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 20:09:31 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/15 18:02:05 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/19 14:41:08 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,11 @@ int			check_сoincidence(t_stack *stack, int len, int val, int *valid)
 	return (1);
 }
 
-void		print_stack(t_stack *stack, int count_cmd)
+int			ps_error(int *valid)
 {
-	int i;
-
-	i = 0;
-	ft_printf("count_cmd = %d\n", count_cmd);
-	ft_printf("la = %d\n", stack->la);
-	ft_printf("lb = %d\n", stack->lb);
-	while (i < stack->la || i < stack->lb)
-	{
-		if (i < stack->la)
-			ft_printf("%d\t", stack->a[i]);
-		else
-			ft_printf("\t");
-		if (i < stack->lb)
-			ft_printf("%d\n", stack->b[i]);
-		else
-			ft_printf("\n");
-		i++;
-	}
-	ft_printf("\n---------\n");
-	ft_printf("a\tb\n");
+	write(2, "Error\n", 6);
+	(*valid) = 0;
+	return (0);
 }
 
 int			check_vals(t_stack *stack, int len, int checker)

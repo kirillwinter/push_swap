@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:47:20 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/15 19:57:35 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/19 15:37:06 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	check_last_3_in_block_a(t_stack *stack, int *sorted, int unsorted)
 	}
 }
 
-int		check_move_val_a(int *arr, int len, int mid)
+int			check_move_val_a(int *arr, int len, int mid)
 {
 	len--;
 	while (len >= 0)
@@ -74,7 +74,6 @@ void		sort_a(t_stack *stack, int *count_block, int *n_block, int *sorted)
 	int	unsorted;
 
 	unsorted = stack->la - (*sorted);
-	// print_stack(stack, unsorted);
 	if (check_vals(stack, unsorted, 0))
 	{
 		(*sorted) += unsorted;

@@ -6,7 +6,7 @@
 /*   By: wballaba <wballaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:55:07 by wballaba          #+#    #+#             */
-/*   Updated: 2019/02/18 17:01:19 by wballaba         ###   ########.fr       */
+/*   Updated: 2019/02/19 16:21:17 by wballaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 static int	read_instructions(t_stack *stack, int *valid, int v)
 {
 	char		*line;
-	int			count_cmd;
 	t_sd		*sd;
 
-	count_cmd = 0;
 	if (v == 2)
 	{
 		sd = create_new_sd(stack);
+		visual_line(sd);
 		mlx_loop_hook(sd->draw->mlx_ptr, ps_draw, sd);
 		mlx_loop(sd->draw->mlx_ptr);
 	}
@@ -68,11 +67,6 @@ static int	read_one_arg_checker(char **argv, int v)
 	return (1);
 }
 
-// int			checker()
-// {
-
-// }
-
 static int	read_many_arg_checker(int argc, char **argv, int v)
 {
 	int		i;
@@ -101,6 +95,8 @@ int			main(int argc, char **argv)
 	int		v;
 
 	v = 1;
+	if (argc == 1)
+		return (ps_error(&v));
 	if (argc > 1 && !ft_strcmp(argv[1], "-v"))
 	{
 		v++;
